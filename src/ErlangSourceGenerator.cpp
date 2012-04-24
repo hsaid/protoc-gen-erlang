@@ -244,8 +244,14 @@ void ErlangGenerator::generate_source(Printer& out, const FileDescriptor* file) 
 {
   out.Print("-module($module$).\n"
             "-include(\"$module$.hrl\").\n\n"
-            "-export([\n"
-            ,"module",module_name(file));
+             ,"module", module_name(file ));
+
+  for (int i = 0; i < file->dependency_count(); ++i)
+  {
+      out.Print("-include(\"$module$.hrl\").\n\n", "module", module_name(file->dependency(i)));
+  }
+  out.Print("-export([\n");
+
   for(int i=0; i < file->enum_type_count();++i)
   {
     export_for_enum(out,file->enum_type(i));
