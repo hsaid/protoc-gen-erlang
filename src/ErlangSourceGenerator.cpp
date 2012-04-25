@@ -248,7 +248,7 @@ void ErlangGenerator::generate_source(Printer& out, const FileDescriptor* file) 
 
   for (int i = 0; i < file->dependency_count(); ++i)
   {
-      out.Print("-include(\"$module$.hrl\").\n\n", "module", module_name(file->dependency(i)));
+      out.Print("-include(\"$module$.hrl\").\n", "module", module_name(file->dependency(i)));
   }
   out.Print("-export([\n");
 
